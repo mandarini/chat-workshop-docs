@@ -65,7 +65,7 @@ as a property, `[userAuth]`.
 In order for this to work, we have to define this property as an input in our
 `ChatComponent`. So, open your `chat.component.ts` file and do the following:
 1. Add `Input` to your imports from `@angular/core`.
-2. On top of your chat component class, add the following line:
+2. At the top of your chat component class (i.e. inside the Class), add the following line:
 ```  
 @Input() userAuth: string;
 ```
