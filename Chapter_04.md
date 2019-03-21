@@ -33,18 +33,27 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 import { AngularFireAuthModule } from '@angular/fire/auth';
 ```
 
-2. Below the imports, declare the `config` constant that contains all the configuration
-code for our Firebase:
+2. Open your `environments/` directory. This contains two separate files, `environment.ts` and `environment.prod.ts`. These files can contain
+contants/parameters that are specific to your app's environment. The `environment.ts` file is used every time you run `ng serve` for local 
+testing. When you want to build your app for production, you run `ng serve --prod` and this will replace the `environment.ts` file with 
+`environment.prod.ts`. 
 
+    __Note:__
+    Why would you want that? Maybe you are using a different environment for testing and for production, and these environment
+    files (which can be as many as you want) can create different builds to use in different deployments, in case you want an app with a single codebase
+    but different parameters for different clients, for example. The specification of which environment to build into which application is set in 
+    `angular.json` and if you want we can talk about it.
+
+For the time being, in both your environment files add a new attribute called firebase:
 ```
-const config = {
+firebase: {
     apiKey: <YOUR_API_KEY>,
     authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
     databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
     projectId: "YOUR_PROJECT_ID",
     storageBucket: "YOUR_PROJECT_ID.appspot.com",
     messagingSenderId: <YOUR_MESSAGESENDER_ID>
-};
+}
 ```
 
 All this information is available in the *Project Overview* tab of your project
@@ -58,8 +67,7 @@ configuration parameters of your project:
 ```
 imports: [
   BrowserModule,
-  AngularFireModule.initializeApp(config),
-  AngularFireDatabaseModule,
+  AngularFireModule.initializeApp(environment.firebase),
   AngularFirestoreModule,
   AngularFireAuthModule
 ],
