@@ -135,9 +135,10 @@ This can't be ok, can it?
 Your database is as safe as your security rules.
 
 Copyingn from the accepted answer, answered by a [Firebase engineer](https://stackoverflow.com/users/209103/frank-van-puffelen), 
-  "The apiKey essentially just identifies your Firebase project on the Google servers. It is not a security risk for someone to know it. In fact, it is necessary for them to know it, in order for them to interact with your Firebase project.
 
-  In that sense it is very similar to the database URL that Firebase has historically been used to identify the back-end: https://<app-id>.firebaseio.com"
+  "The apiKey essentially just identifies your Firebase project on the Google servers. It is not a security risk for someone to know it. In fact, it is necessary for them to know it, in order for them to interact with your Firebase project."
+
+  "In that sense it is very similar to the database URL that Firebase has historically been used to identify the back-end: `https://<app-id>.firebaseio.com`"
 
 It's also very much like your Google Maps JS API key, if you're using the Google Maps JS API, that is.
 So, you should rely on your security rules for security. Which guard your application against your __clients__ actions.
