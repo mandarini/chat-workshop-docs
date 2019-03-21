@@ -9,6 +9,7 @@ application, here are some suggestions:
 2. Try fetching only the last X number of messages.
 3. Show timestamp on messages.
 4. Make log-in screen more beautiful.
-5. Try out more Firestore methods. Find the angularfire2 Firestore docs [here](https://github.com/angular/angularfire2/tree/master/docs/firestore).
+5. Create a user profile
+6. Try out more Firestore methods. Find the @angular/fire Firestore docs [here](https://github.com/angular/angularfire2/tree/master/docs/firestore).
 
 [previous chapter](Chapter_10.md) | [home](README.md)

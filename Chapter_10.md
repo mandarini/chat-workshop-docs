@@ -3,13 +3,12 @@
 [previous chapter](Chapter_09.md) <----> [next chapter](Chapter_11.md) | [home](README.md)
 
 Now that all is said and done, we are ready to deploy!
-A nice step by step guide found in the Angular-CLI GitHub repo is [here](https://github.com/angular/angular-cli/wiki/stories-github-pages).
 
-We are going to follow this guide and maybe explain some things on the way!
+We're going to deploy our Angular application to [Firebase hosting](https://firebase.google.com/docs/hosting/).
 
-## Pushing our project to GitHub
+## Optional Step - Pushing our project to GitHub
 
-First of all, your project must be published to GitHub. The following steps
+You can, if you want, push your project to GitHub. The following steps
 are very explanatory, in case someone has never used git before, so bear with me here!
 If you are a pro, just push your project to GitHub and move to the next step!
 
@@ -58,56 +57,91 @@ git push -u origin master
 ```
 6. Refresh the page on your GitHub and see that all your code is there!
 
-## Publishing our project on GitHub pages
+## Deploying to Firebase
 
-Following the steps of [this](https://github.com/angular/angular-cli/wiki/stories-github-pages)
-awesome guide here:
+In order to deploy our project easily on Firebase, we need the [firebase tools](https://www.npmjs.com/package/firebase-tools) we installed in
+Chapter 02.
 
-1. In your terminal, in your project folder, type:
+The gist is -> you manage your application on Firebase console through the command line.
+
+1. So, first thing to do is sign in:
 ```
-ng build --prod --output-path docs --base-href https://YOURUSERNAME.github.io/YOUR-PROJECT-NAME/
+firebase login
 ```
-This will build your project, and add as a base link to it the future link of
-your project (all your projects that are published on GitHub pages are under
-  `https://YOURUSERNAME.github.io/`). It will also add the build in a folder named
-  `/docs`.
 
-2. As it says in the guide, _Make a copy of docs/index.html and name it docs/404.html_.
-This will be your 404 page, obviously.
+Now, firebase tools know who you are what your projects are. Ypu can see them by running
+```
+firebase list
+```
+but that's not what we need.
 
-3. Now, notice how we have made changes to our project! So, what do we do?
-  * We tell git that we made changes:
-    ```
-    git commit -m 'new build'
-    ```
-  * We push these changes
-    ```
-    git push
-    ```
-Everything is uploaded on GitHub now.
+2. We need to choose the project we want to and generate the files we need to for deployment.
+So, in your console run
+```
+firebase init
+```
+This will eventually generate two files, `firebase.json` and `.firebaserc`. You can read more about these files in 
+the [documentation](https://firebase.google.com/docs/cli/#initialize_a_firebase_project).
 
-4. Go to the GitHub page of your project and go to the _Settings_ tab.
+  * In the first step/question choose Firestore and Hosting. You don't really __have__ to choose 
+  Firestore, but in this way you can version control your security rules (they are version 
+  controled anyhow in the console, but you can have them right there in your project if you do so, so it's cool.)
 
-5. Scroll all the way down to the _GitHub Pages_ section.
+    ![firebase init - first question](img/firebase_init.png)
 
-6. As _Source_, select __master branch /docs folder__ and click _Save_.
+  * In __Hosting Setup__:
+    * in the _pubic directory_ question, be sure to specify 
+       the public directory to be "`dist/you_applications_name`".
+    * Configure as a single-page app --> Yes     
+    * And don't overwrite `index.html`
+  
+  ![Hosting setup](img/hosting_fb.png)
+  
+3. Now that initialization is finished, take a look at your generated files! You can read more about `firebase.json` in the [docs](https://firebase.google.com/docs/cli/#the_firebasejson_file).
 
-7. Now your project is published!
+4. So, now we have to build our application for production!
 
-8. Careful! Don't forget to add `https://YOURUSERNAME.github.io/` to the authorized
-domains in your Firebase console in the Authentication section, as we said in
-[Chapter 5](Chapter_05.md). You can do that if you go to your project on the
-[Firebase console](https://console.firebase.google.com/), choose _Authentication_
-from the side menu, and on the _Sign-in Method_ tab scroll to the second
-section named _Authorized domains_. Click on _Add Domain_ and add your
-`https://YOURUSERNAME.github.io/` domain there! Now it should work!
+```
+ng build --prod
+```
 
-_An extra tip:
-You might want to hide API keys and configuration from your "unbuilt" code.
-In that case you can remove them from the `app.module.ts` and push your code again.
-The build in the docs folder will not be affected of course (until you build it again).
-This does not guarantee security, of course, since anyone can see the API keys in
-past commits or in the build, however it's just a small thin layer of
-security._
+The `--prod` flag will replace the `environment.ts` file with the `environment.prod.ts`, which has the `production` flag set to `true`,
+which will enable production mode (`enableProdMode()` in `main.ts`). Read more [here](https://angular.io/api/core/enableProdMode) or ask me! :)
+
+This command will generate a directory, `dist/`, into which will be all we need for our app to run. 
+
+![The /dist directory](img/dist.png)
+
+5. And now, my favorite step! Just type and run
+
+```
+firebase deploy
+```
+And your app is live in the URL provided there!
+
+Now. go to your [console](https://console.firebase.google.com/), in your project, at the hosting tab, and see it there!
+
+
+## WAIT!
+
+### Wait, did I just push my API keys on GitHub?
+
+GitGuardian is probably already knocking frantically at your door. 
+
+![GitGuardian](img/gitguardian.png)
+
+This can't be ok, can it?
+[Well, it can](https://stackoverflow.com/questions/37482366/is-it-safe-to-expose-firebase-apikey-to-the-public). 
+Your database is as safe as your security rules.
+
+Copyingn from the accepted answer, answered by a [Firebase engineer](https://stackoverflow.com/users/209103/frank-van-puffelen), 
+  "The apiKey essentially just identifies your Firebase project on the Google servers. It is not a security risk for someone to know it. In fact, it is necessary for them to know it, in order for them to interact with your Firebase project.
+
+  In that sense it is very similar to the database URL that Firebase has historically been used to identify the back-end: https://<app-id>.firebaseio.com"
+
+It's also very much like your Google Maps JS API key, if you're using the Google Maps JS API, that is.
+So, you should rely on your security rules for security. Which guard your application against your __clients__ actions.
+
+For any more questions on that, give me a shout out! And, watch [this great video](https://youtu.be/eW5MdE3ZcAw) that explains Firestore security and the rules complexity.
 
 [previous chapter](Chapter_09.md) <----> [next chapter](Chapter_11.md) | [home](README.md)
