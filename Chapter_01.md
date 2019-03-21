@@ -10,6 +10,10 @@ Our final application will look something like this:
 
 After this, each of you can proceed with adding their own styles or additional functionalities and information (eg. timestamp, different appearance of messages and usernames, etc.)
 
+Link to the finished app code:
+* with steps (tags) -> [github.com/mandarini/chat-workshop-steps](https://github.com/mandarini/chat-workshop-steps/)
+* just the code -> [github.com/mandarini/chat-workshop](https://github.com/mandarini/chat-workshop)
+
 ## Requirements
 
 This is a chat application, so we will have the following requirements:
@@ -35,7 +39,7 @@ If you want to make sure that what you have is aligned with what you should have
 
 At the end of each chapter:
 
-1. Go to the [GitHub repository](https://github.com/mandarini/chat-workshop-docs) of this workshop.
+1. Go to the [GitHub repository](https://github.com/mandarini/chat-workshop-steps) of this workshop.
 2. Choose the chapter you are on from the Tags list in the branches drop down menu on the top
 right, like this:
 ![Branches and tags](img/branches.png)
@@ -46,9 +50,9 @@ you are on the correct tag (chapter)!
 
 At the end of each chapter:
 
-1. Clone the [GitHub repository](https://github.com/mandarini/chat-workshop) of this workshop:
+1. Clone the [GitHub repository](https://github.com/mandarini/chat-workshop-steps) of this workshop:
 ```
-git clone https://github.com/mandarini/chat-workshop.git
+git clone https://github.com/mandarini/chat-workshop-steps.git
 ```
 2. Fetch all the tags locally:
 ```

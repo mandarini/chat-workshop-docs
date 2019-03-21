@@ -76,7 +76,7 @@ use it in our component.
 
 In your `app.component.ts` file, add these in your imports:
 ```
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 ```
 
