@@ -17,7 +17,7 @@ to our project, the library that will help
 us use Firebase functions in our Angular project.
 In your terminal type:
 ```
-npm install firebase angularfire2 --save
+npm install firebase @angular/fire --save
 ```
 
 ## Setting up Firebase in our Angular app
@@ -28,10 +28,9 @@ Open the file `src/app/app.module.ts`.
 
 1. On the top of the file, copy and paste the following imports:
 ```
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 ```
 
 2. Below the imports, declare the `config` constant that contains all the configuration
@@ -64,6 +63,7 @@ imports: [
   AngularFirestoreModule,
   AngularFireAuthModule
 ],
+providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
 ```
 
 

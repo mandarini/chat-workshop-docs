@@ -40,7 +40,7 @@ This will create a new service called `ChatService` in the file `chat.service.ts
 Open the file, and add the following imports:
 ```
 import { Message } from "./message.model";
-import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 ```
 We are importing our Message interface because we will need it to tell the collection
 what type of data to expect.
@@ -71,7 +71,7 @@ Now our service is ready, and we can go to our `ChatComponent` to fetch the mess
 
 ## Fetching the Firestore collection
 
-Go to your `chat.component.ts` file and import `AngularFirestore` and `AngularFirestoreCollection` from `angularfire2/firestore`.
+Go to your `chat.component.ts` file and import `AngularFirestore` and `AngularFirestoreCollection` from `@angular/fire/firestore`.
 
 Import also `Observable` from `rxjs` and our `Message` interface.
 

@@ -61,5 +61,4 @@ which means that we allow read and write if the requested authorization uid is n
 means "if a user is signed in".
 
 
-
 [previous chapter](Chapter_05.md) <----> [next chapter](Chapter_07.md) | [home](README.md)

@@ -45,6 +45,9 @@ For more detailed instructions, see [here](https://www.npmjs.com/package/@angula
 ## Install the Firebase tools CLI
 
 Detailed instructions [here](https://firebase.google.com/docs/cli/).
+
+This will help us set up authentication, rules, and deploy in the end!
+
 In your terminal type:
 ```
 npm install -g firebase-tools
